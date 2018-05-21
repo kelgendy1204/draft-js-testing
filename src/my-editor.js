@@ -8,26 +8,17 @@ export default class MyEditor extends Component {
         editorState: EditorState.createEmpty()
     }
 
-    constructor(props) {
-        super(props);
-        this.handleKeyCommand = this.handleKeyCommand.bind(this);
-    }
-
     logState = () => console.log(this.state.editorState.toJS())
 
     onChange = editorState => this.setState({ editorState })
 
-    handleKeyCommand(command, editorState) {
+    handleKeyCommand = (command, editorState) => {
         const newState = RichUtils.handleKeyCommand(editorState, command);
         if (newState) {
             this.onChange(newState);
             return 'handled';
         }
         return 'not-handled';
-    }
-
-    componentDidMount(){
-        this.domEditor.focus();
     }
 
     render() {
@@ -37,17 +28,15 @@ export default class MyEditor extends Component {
                     <Segment>
                         <div style={{ textAlign: 'left' }}>
                             <Editor
-                                editorState={this.state.editorState}
-                                onChange={this.onChange}
-                                handleKeyCommand={this.handleKeyCommand}
-                                ref={ref => this.domEditor = ref}
-                            />
+                            handleKeyCommand={this.handleKeyCommand}
+                            onChange={this.onChange}
+                            editorState={this.state.editorState} />
                         </div>
                     </Segment>
                 </Container>
                 <div style={{ marginTop: 5 }}>
                     <Button onClick={this.logState}>
-                      Log state to console
+                        Log state to console
                     </Button>
                 </div>
             </div>

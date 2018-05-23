@@ -2,7 +2,6 @@ import React from 'react';
 import { Segment, Container } from 'semantic-ui-react';
 import CustomEditor from './custom-editor';
 import SuggestionList from './suggestions';
-import styles from './styles';
 import { normalizeIndex, filterArray } from './utils';
 import * as triggers from './triggers';
 import * as data from './data';
@@ -21,7 +20,6 @@ export default class AutocompleteInput extends React.Component {
     }
 
     onInsert = insertState => {
-        alert();
         if (!filteredArrayTemp) {
             return null;
         }
@@ -58,7 +56,13 @@ export default class AutocompleteInput extends React.Component {
 
     render() {
         return (
-            <div style={styles.root}>
+            <div style={{
+                width: 600,
+                padding: 40,
+                fontFamily: 'sans-serif',
+                margin: 'auto',
+                fontSize: '15pt'
+            }}>
                 {this.renderAutocomplete()}
                 <Container>
                     <Segment>

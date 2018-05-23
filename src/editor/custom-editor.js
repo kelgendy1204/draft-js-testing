@@ -17,13 +17,13 @@ export default class CustomEditor extends Component {
         editorState: EditorState.createEmpty()
     }
 
-    onEditorState = editorState => this.setState({ editorState });
+    changeEditorState = editorState => this.setState({ editorState });
 
     autocompleteState = null;
 
     onChange = editorState => {
+        this.changeEditorState(editorState);
         const { onAutocompleteChange } = this.props;
-        this.onEditorState(editorState);
         if (onAutocompleteChange) {
             window.requestAnimationFrame(() => {
                 onAutocompleteChange(this.getAutocompleteState());
@@ -31,7 +31,7 @@ export default class CustomEditor extends Component {
         }
     }
 
-    onArrow = (e, originalHandler, nudgeAmount) => {
+    onArrow = (e, originalHandler, direction) => {
         const { onAutocompleteChange } = this.props;
         let autocompleteState = this.getAutocompleteState(false);
         if (!autocompleteState) {
@@ -42,7 +42,7 @@ export default class CustomEditor extends Component {
         }
 
         e.preventDefault();
-        autocompleteState.selectedIndex += nudgeAmount;
+        autocompleteState.selectedIndex += direction;
         this.autocompleteState = autocompleteState;
         if (onAutocompleteChange) {
             onAutocompleteChange(autocompleteState);
@@ -107,7 +107,7 @@ export default class CustomEditor extends Component {
         );
         const { onInsert } = this.props;
         const newEditorState = onInsert(insertState);
-        this.onEditorState(newEditorState);
+        this.changeEditorState(newEditorState);
     }
 
     getInsertState = (selectedIndex, trigger) => {
@@ -231,8 +231,9 @@ export default class CustomEditor extends Component {
             <Editor
                 customStyleMap={styles}
                 editorState={editorState}
-                handleReturn={this.handleReturn}
                 onChange={this.onChange}
+                handleReturn={this.handleReturn}
+
                 onEscape={this.onEscape}
                 onUpArrow={this.onUpArrow}
                 onDownArrow={this.onDownArrow}

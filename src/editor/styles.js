@@ -1,18 +1,4 @@
 const styles = {
-    root: {
-        width: 600,
-        padding: 40,
-        fontFamily: 'sans-serif',
-        margin: 'auto',
-        fontSize: '15pt'
-    },
-    editor: {
-        borderRadius: 4,
-        minHeight: 30,
-        padding: 10,
-        background: '#2b303b',
-        color: '#85939f'
-    },
     suggestions: {
         borderRadius: 3,
         margin: 0,

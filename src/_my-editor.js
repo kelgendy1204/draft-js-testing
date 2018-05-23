@@ -28,9 +28,9 @@ export default class MyEditor extends Component {
                     <Segment>
                         <div style={{ textAlign: 'left' }}>
                             <Editor
-                            handleKeyCommand={this.handleKeyCommand}
-                            onChange={this.onChange}
-                            editorState={this.state.editorState} />
+                                handleKeyCommand={this.handleKeyCommand}
+                                onChange={this.onChange}
+                                editorState={this.state.editorState} />
                         </div>
                     </Segment>
                 </Container>
